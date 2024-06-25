@@ -22,8 +22,16 @@
 // module.exports = db;
 
 const mongoose = require("mongoose");
+require("dotenv").config(); 
 
-const mongoURL = "mongodb://127.0.0.1:27017/hotel";
+
+// const mongoURL = "mongodb://127.0.0.1:27017/hotel";
+
+// const mongoURL ="mongodb+srv://hellosid:hellosid@cluster0.pu7kfmb.mongodb.net/";
+
+// const mongoURL = process.env.MONGODB_URL_LOCAL;
+
+const mongoURL = process.env.MONGODB_URL;
 
 const connectOptions = {
   useNewUrlParser: true,
@@ -33,6 +41,7 @@ const connectOptions = {
 mongoose.connect(mongoURL, connectOptions);
 
 const db = mongoose.connection;
+
 
 db.on("connected", () => {
   console.log("Connected to MongoDB");
