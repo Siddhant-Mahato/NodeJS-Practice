@@ -25,7 +25,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 
-/*
+
 const mongoose = require("mongoose");
 require("dotenv").config(); 
 
@@ -61,39 +61,42 @@ db.on("disconnected", () => {
 });
 
 module.exports = db;
-*/
 
-const mongoose = require("mongoose");
-require("dotenv").config();
 
-const mongoURL = process.env.MONGODB_URL;
 
-const connectOptions = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverSelectionTimeoutMS: 30000, // 30 seconds timeout for server selection
-  socketTimeoutMS: 45000, // 45 seconds socket timeout
-};
+// --------------------------------------------------------------------------------------------------------------------
 
-mongoose.set("debug", true); // Enable detailed logging
+// const mongoose = require("mongoose");
+// require("dotenv").config();
 
-mongoose
-  .connect(mongoURL, connectOptions)
-  .then(() => console.log("MongoDB Connected"))
-  .catch((err) => console.error("Initial MongoDB Connection Error", err));
+// const mongoURL = process.env.MONGODB_URL;
 
-const db = mongoose.connection;
+// const connectOptions = {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   serverSelectionTimeoutMS: 30000, // 30 seconds timeout for server selection
+//   socketTimeoutMS: 45000, // 45 seconds socket timeout
+// };
 
-db.on("connected", () => {
-  console.log("MongoDB Connection Established");
-});
+// mongoose.set("debug", true); // Enable detailed logging
 
-db.on("error", (err) => {
-  console.error("MongoDB Connection Error", err);
-});
+// mongoose
+//   .connect(mongoURL, connectOptions)
+//   .then(() => console.log("MongoDB Connected"))
+//   .catch((err) => console.error("Initial MongoDB Connection Error", err));
 
-db.on("disconnected", () => {
-  console.log("MongoDB Connection Disconnected");
-});
+// const db = mongoose.connection;
 
-module.exports = db;
+// db.on("connected", () => {
+//   console.log("MongoDB Connection Established");
+// });
+
+// db.on("error", (err) => {
+//   console.error("MongoDB Connection Error", err);
+// });
+
+// db.on("disconnected", () => {
+//   console.log("MongoDB Connection Disconnected");
+// });
+
+// module.exports = db;
