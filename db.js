@@ -21,6 +21,11 @@
 
 // module.exports = db;
 
+
+// --------------------------------------------------------------------------------------------------------------------
+
+
+/*
 const mongoose = require("mongoose");
 require("dotenv").config(); 
 
@@ -45,6 +50,42 @@ const db = mongoose.connection;
 
 db.on("connected", () => {
   console.log("Connected to MongoDB");
+});
+
+db.on("error", (err) => {
+  console.error("MongoDB Connection Error", err);
+});
+
+db.on("disconnected", () => {
+  console.log("MongoDB Connection Disconnected");
+});
+
+module.exports = db;
+*/
+
+const mongoose = require("mongoose");
+require("dotenv").config();
+
+const mongoURL = process.env.MONGODB_URL;
+
+const connectOptions = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 10000, // 10 seconds timeout
+  socketTimeoutMS: 45000, // 45 seconds socket timeout
+};
+
+mongoose.set("debug", true); // Enable detailed logging
+
+mongoose
+  .connect(mongoURL, connectOptions)
+  .then(() => console.log("MongoDB Connected"))
+  .catch((err) => console.error("Initial MongoDB Connection Error", err));
+
+const db = mongoose.connection;
+
+db.on("connected", () => {
+  console.log("MongoDB Connection Established");
 });
 
 db.on("error", (err) => {
