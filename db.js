@@ -71,7 +71,7 @@ const mongoURL = process.env.MONGODB_URL;
 const connectOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  serverSelectionTimeoutMS: 10000, // 10 seconds timeout
+  serverSelectionTimeoutMS: 30000, // 30 seconds timeout for server selection
   socketTimeoutMS: 45000, // 45 seconds socket timeout
 };
 

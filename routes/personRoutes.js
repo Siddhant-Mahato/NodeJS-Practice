@@ -23,21 +23,34 @@ router.post("/", async (req, res) => {
 
 
 
+// router.get("/", async (req, res) => {
+//     try
+//     {
+//         const data = await Person.find();
+//         console.log("data Fetched");
+//         res.status(200).json(data);
+//     }
+//     catch (error)
+//     {
+//         console.log(error);
+//         res.status(500).json({ error: "Error saving error" });
+//     }
+// });
+
 router.get("/", async (req, res) => {
-    try
-    {
-        const data = await Person.find();
-        console.log("data Fetched");
-        res.status(200).json(data);
+  try {
+    const data = await Person.find().timeout(20000); // Example of increasing timeout
+    console.log("Data Fetched");
+    res.status(200).json(data);
+  } catch (error) {
+    console.error("Error fetching persons:", error);
+    if (error.name === "MongooseTimeoutError") {
+      res.status(503).json({ error: "Database operation timed out" });
+    } else {
+      res.status(500).json({ error: "Internal server error" });
     }
-    catch (error)
-    {
-        console.log(error);
-        res.status(500).json({ error: "Error saving error" });
-    }
-});
-
-
+  }
+}); 
 
 
 router.get("/:work", async (req, res) => {
