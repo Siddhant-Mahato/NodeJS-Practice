@@ -119,8 +119,16 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 const PORT = process.env.PORT || 3000;
 
+// Middleware Function
+const logRequest = (req, res, next) => {
+    console.log(`[${new Date().toLocaleString()}] Request Made to : ${req.originalUrl}`);
+    next(); // Move on to the next phase
+}
+app.use(logRequest);
 
-app.get("/", (req, res) => {
+
+
+app.get("/", logRequest ,(req, res) => {
   res.send("Welcome to our hotel");
 });
 
@@ -130,7 +138,7 @@ const menuItemsRoutes = require("./routes/menuItemsRoutes");
 
 
 
-app.use("/person", personRoutes);
+app.use("/person" , personRoutes);
 app.use("/menuitem",menuItemsRoutes);
 
 
