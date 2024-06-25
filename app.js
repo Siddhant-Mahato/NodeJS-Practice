@@ -117,7 +117,7 @@ const db = require("./db");
 require('dotenv').config(); 
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 
 app.get("/", (req, res) => {
