@@ -115,9 +115,14 @@ const express = require("express");
 const app = express();
 const db = require("./db");
 require('dotenv').config(); 
+
+const passport = require('./auth');
+// const Person = require('./models/Person');
+
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 const PORT = process.env.PORT || 3000;
+
 
 // Middleware Function
 const logRequest = (req, res, next) => {
@@ -127,8 +132,11 @@ const logRequest = (req, res, next) => {
 app.use(logRequest);
 
 
+app.use(passport.initialize());
 
-app.get("/", logRequest ,(req, res) => {
+const localAuthMiddleware =  passport.authenticate("local", { session: false }); 
+
+app.get("/",(req, res) => {
   res.send("Welcome to our hotel");
 });
 
@@ -138,7 +146,7 @@ const menuItemsRoutes = require("./routes/menuItemsRoutes");
 
 
 
-app.use("/person" , personRoutes);
+app.use("/person", localAuthMiddleware, personRoutes);
 app.use("/menuitem",menuItemsRoutes);
 
 
