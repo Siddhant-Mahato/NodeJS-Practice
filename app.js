@@ -146,7 +146,7 @@ const menuItemsRoutes = require("./routes/menuItemsRoutes");
 
 
 
-app.use("/person", localAuthMiddleware, personRoutes);
+app.use("/person", personRoutes);
 app.use("/menuitem",menuItemsRoutes);
 
 
