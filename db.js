@@ -27,13 +27,7 @@
 
 
 const mongoose = require("mongoose");
-require("dotenv").config(); 
-
-
-// const mongoURL = "mongodb://127.0.0.1:27017/hotel";
-
-// const mongoURL ="mongodb+srv://hellosid:hellosid@cluster0.pu7kfmb.mongodb.net/";
-
+require("dotenv").config();
 const mongoURL = process.env.MONGODB_URL_LOCAL;
 
 // const mongoURL = process.env.MONGODB_URL;
